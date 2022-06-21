@@ -3,11 +3,11 @@ html {
   height: 100vh;
   overflow: hidden;
   font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
-  background-color: #000000;
+  background-color: #ffffff;
 }
 
 body {
-  background-color: #000000;
+  background-color: #ffffff;
 }
 
 .main {
@@ -24,7 +24,7 @@ body {
 
 .container {
   padding: 1rem 1.2rem 1rem 1.2rem;
-  color: #ffffff;
+  color: #000000;
   transition: all 0.3s linear;
   border-radius: 1px;
 }
@@ -33,7 +33,6 @@ body {
   font-weight: 600;
   font-size: 3rem;
   color: inherit;
-  text-transform: uppercase;
 }
 
 @media only screen and (min-device-width: 992px) {
