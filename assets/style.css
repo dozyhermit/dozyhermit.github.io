@@ -3,11 +3,11 @@ html {
   height: 100vh;
   overflow: hidden;
   font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
-  background-color: #ffffff;
+  background-color: #000000;
 }
 
 body {
-  background-color: #ffffff;
+  background-color: #000000;
 }
 
 .main {
@@ -24,7 +24,7 @@ body {
 
 .container {
   padding: 1rem 1.2rem 1rem 1.2rem;
-  color: #000000;
+  color: #ffffff;
   transition: all 0.3s linear;
   border-radius: 1px;
 }
