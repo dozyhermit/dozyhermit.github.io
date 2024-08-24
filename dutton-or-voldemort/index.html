@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Dutton or Voldemort!</title>
+    <link rel="stylesheet" href="./static/main.css" />
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="header">
+          <h1>Dutton or Voldemort!</h1>
+          <h1 class="header-score">Score: <span id="round-score">0</span></h1>
+        </div>
+
+        <div class="round-image">
+          <div class="round-correct">
+            <h1>Correct!</h1>
+          </div>
+
+          <div class="round-incorrect">
+            <h1>Incorrect!</h1>
+          </div>
+        </div>
+
+        <div class="round-start" onclick="startRound()">
+          <h1>Tap or click to start!</h1>
+
+          <p>
+            The rules are simple. We show you a silhouette of Dutton or
+            Voldemort and you try to guess who it is.
+          </p>
+        </div>
+
+        <div class="round-action">
+          <button class="round-button round-action-dutton" onclick="isDutton()">
+            <span>Dutton</span>
+          </button>
+
+          <button
+            class="round-button round-action-voldemort"
+            onclick="isVoldemort()"
+          >
+            <span>Voldemort</span>
+          </button>
+        </div>
+
+        <div class="round-next">
+          <button class="round-button round-action-next" onclick="getRound()">
+            <span>Next Round</span>
+          </button>
+        </div>
+      </div>
+    </main>
+  </body>
+
+  <script src="./static/main.js"></script>
+</html>
