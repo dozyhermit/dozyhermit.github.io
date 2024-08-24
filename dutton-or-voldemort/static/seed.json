@@ -1,0 +1,208 @@
+[
+  {
+    "mask": "000-mask",
+    "unmask": "000-unmask",
+    "answer": "voldemort"
+  },
+  {
+    "mask": "001-mask",
+    "unmask": "001-unmask",
+    "answer": "dutton"
+  },
+  {
+    "mask": "002-mask",
+    "unmask": "002-unmask",
+    "answer": "dutton"
+  },
+  {
+    "mask": "003-mask",
+    "unmask": "003-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "004-mask",
+    "unmask": "004-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "005-mask",
+    "unmask": "005-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "006-mask",
+    "unmask": "006-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "007-mask",
+    "unmask": "007-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "008-mask",
+    "unmask": "008-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "009-mask",
+    "unmask": "009-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "010-mask",
+    "unmask": "010-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "011-mask",
+    "unmask": "011-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "012-mask",
+    "unmask": "012-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "013-mask",
+    "unmask": "013-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "014-mask",
+    "unmask": "014-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "015-mask",
+    "unmask": "015-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "016-mask",
+    "unmask": "016-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "017-mask",
+    "unmask": "017-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "018-mask",
+    "unmask": "018-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "019-mask",
+    "unmask": "019-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "020-mask",
+    "unmask": "020-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "021-mask",
+    "unmask": "021-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "022-mask",
+    "unmask": "022-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "023-mask",
+    "unmask": "023-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "024-mask",
+    "unmask": "024-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "025-mask",
+    "unmask": "025-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "026-mask",
+    "unmask": "026-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "027-mask",
+    "unmask": "027-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "028-mask",
+    "unmask": "028-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "029-mask",
+    "unmask": "029-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "030-mask",
+    "unmask": "030-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "031-mask",
+    "unmask": "031-unmask",
+    "answer": "dutton"
+  },
+
+  {
+    "mask": "032-mask",
+    "unmask": "0032-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "033-mask",
+    "unmask": "033-unmask",
+    "answer": "voldemort"
+  },
+
+  {
+    "mask": "034-mask",
+    "unmask": "034-unmask",
+    "answer": "voldemort"
+  }
+]
