@@ -44,6 +44,10 @@ function displayHeaderScore(display = true) {
   displayElementByClassName("header-score", display);
 }
 
+function displayRoundOver(display = true) {
+  displayElementByClassName("round-over", display);
+}
+
 function displayErrorElement() {
   const element = document.getElementsByClassName("container")[0];
   element.innerHTML =
@@ -55,18 +59,23 @@ function displayErrorElement() {
 
 function setRoundImageElement(mask = true) {
   const suffix = mask === true ? "-mask" : "-unmask";
+  const prefix = mask === true ? "mask" : "unmask";
 
-  const filename = `static/images/${
-    mask === true ? "mask" : "unmask"
-  }/${CURRENT_ROUND.toString().padStart(3, "0")}${suffix}.jpeg`;
+  const base = `static/images/${prefix}/`;
+  const roundString = CURRENT_ROUND.toString().padStart(3, "0");
+
+  const filename = `${base}${roundString}${suffix}.jpeg`;
 
   const element = document.getElementsByClassName("round-image")[0];
   element.style.backgroundImage = `url("${filename}")`;
 }
 
 function setScoreElement() {
-  const score = document.getElementById("round-score");
-  score.textContent = SCORE;
+  const score = document.getElementsByClassName("round-score");
+
+  Array.from(score).forEach((element) => {
+    element.textContent = SCORE;
+  });
 }
 
 function resetHeaderWordWrap() {
@@ -92,13 +101,28 @@ async function setSeedJson() {
   }
 }
 
+function endRound() {
+  displayRoundStart(false);
+  displayHeaderScore(false);
+  displayRoundImage(false);
+  displayActionElement(false);
+  displayNextElement(false);
+
+  return displayRoundOver();
+}
+
 function getRound() {
   LAST_ROUND = CURRENT_ROUND;
-  CURRENT_ROUND = Math.floor(Math.random() * SEED.length);
+  CURRENT_ROUND = LAST_ROUND + 1;
 
   // this shouldn't happen but just in case
   if (LAST_ROUND === CURRENT_ROUND && LAST_ROUND !== 0 && CURRENT_ROUND !== 0) {
     return getRound();
+  }
+
+  // end round
+  if (CURRENT_ROUND >= SEED.length - 1) {
+    return endRound();
   }
 
   // hide previous round styles
@@ -118,13 +142,17 @@ function incrementScore() {
 
 function isCorrect(answer) {
   displayNextElement();
+
+  // hide round actions
   displayActionElement(false);
   setRoundImageElement(false);
 
+  // if there's a problem
   if (SEED && SEED[CURRENT_ROUND] && SEED[CURRENT_ROUND].answer !== answer) {
     return displayIncorrectElement();
   }
 
+  // increment score
   displayCorrectElement();
   incrementScore();
 }
@@ -138,8 +166,14 @@ function isVoldemort() {
 }
 
 function startRound() {
+  // reset score to zero
+  CURRENT_ROUND = LAST_ROUND = SCORE = 0;
+  setScoreElement();
+
   // remove start styles
   resetHeaderWordWrap();
+
+  displayRoundOver(false);
   displayRoundStart(false);
   displayHeaderScore(true);
   displayRoundImage(true);

@@ -33,8 +33,9 @@ main > .container {
 
 main > .container > .header {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
 
   padding-left: 1rem;
@@ -43,11 +44,47 @@ main > .container > .header {
   white-space: nowrap;
 }
 
+main > .container > .header > p {
+  margin-top: -0.6rem;
+}
+
 @media screen and (min-width: 800px) {
   main > .container > .header {
     padding-left: 1rem;
     padding-right: 1rem;
   }
+}
+
+main > .container > .header > .header-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+main > .container > .header > .header-title > img {
+  display: none;
+}
+
+@media screen and (min-width: 800px) {
+  main > .container > .header > .header-title > img {
+    display: inline;
+    height: auto;
+    max-height: 50px;
+    width: 50px;
+    padding: 1rem;
+    border-radius: 100%;
+  }
+}
+
+main > .container > .header > .header-title > img:last-child,
+main > .container > .round-start img:last-child,
+main > .container > .round-over img:last-child {
+  -webkit-transform: scale(-1, 1);
+  -moz-transform: scale(-1, 1);
+  -o-transform: scale(-1, 1);
+  transform: scale(-1, 1);
 }
 
 main > .container > .round-image {
@@ -60,7 +97,8 @@ main > .container > .round-image {
   overflow: hidden;
 }
 
-main > .container > .round-start {
+main > .container > .round-start,
+main > .container > .round-over {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -71,8 +109,18 @@ main > .container > .round-start {
   padding: 2rem;
 }
 
+main > .container > .round-start img,
+main > .container > .round-over img {
+  height: auto;
+  max-height: 120px;
+  width: 100px;
+
+  text-align: center;
+}
+
 @media screen and (min-width: 800px) {
-  main > .container > .round-start {
+  main > .container > .round-start,
+  main > .container > .round-over {
     padding: 10rem;
   }
 }
@@ -121,30 +169,29 @@ main > .container > .round-next > .round-button {
 
 main > .container > .round-action > .round-button > span,
 main > .container > .round-next > .round-button > span {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 500;
+  white-space: nowrap;
 }
 
 main > .container > .round-action > .round-button > span {
-  color: white;
-  background-color: black;
+  background-color: #fafafafa;
+  color: black;
 }
 
 main > .container > .round-action > .round-action-dutton {
-  background-color: black;
-  background-image: url("./images/dutton.jpg");
-  color: white;
+  background-color: #fafafafa;
+  color: black;
 }
 
 main > .container > .round-action > .round-action-voldemort {
-  background-color: black;
-  background-image: url("./images/voldemort.jpeg");
-  color: white;
+  background-color: #fafafafa;
+  color: black;
 }
 
 main > .container > .round-next > .round-action-next {
-  background-color: blue;
-  color: white;
+  background-color: #fafafafa;
+  color: black;
 }
 
 main > .container > .round-image > .round-correct,
@@ -152,7 +199,8 @@ main > .container > .round-image > .round-incorrect,
 main > .container > .round-next,
 main > .container > .round-action,
 main > .container > .header > .header-score,
-main > .container > .round-image {
+main > .container > .round-image,
+main > .container > .round-over {
   display: none;
 }
 
