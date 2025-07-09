@@ -1,13 +1,43 @@
 // CONSTANTS
 
-const IS_DUTTON_VALUE = "dutton";
-const IS_VOLDEMORT_VALUE = "voldemort";
+// generic
 
-let CURRENT_ROUND = 0,
-  LAST_ROUND = 0,
-  SCORE = 0;
+const SEED_JSON_PATH = "static/seed.json";
+const ERROR_MESSAGE_AS_HTML =
+  "<h1><em>Dutton or Voldemort</em> is having problems. Please refresh or just come back later. This is just a pet project I spent an hour or so on, so it is what it is. <br/><br/> - dozyhermit</h1>";
 
-let SEED = [];
+// classes
+
+const CONTAINER_CLASS = "container";
+
+const HEADER_CLASS = "header";
+const HEADER_SCORE_CLASS = "header-score";
+
+const START_ROUND_CLASS = "round-start";
+const END_ROUND_CLASS = "round-over";
+
+const CORRECT_ROUND_CLASS = "round-correct";
+const INCORRECT_ROUND_CLASS = "round-incorrect";
+const NEXT_ROUND_CLASS = "round-next";
+
+const ROUND_ACTION_CLASS = "round-action";
+const ROUND_IMAGE_CLASS = "round-image";
+const ROUND_SCORE_CLASS = "round-score";
+
+const MASK_IX = "mask";
+const UNMASK_IX = "unmask";
+
+// game
+
+const IS_DUTTON = "dutton";
+const IS_VOLDEMORT = "voldemort";
+
+let Game = {
+  CurrentRound: 0,
+  LastRound: 0,
+  Score: 0,
+  Seed: [],
+};
 
 // VISUAL
 
@@ -17,69 +47,68 @@ function displayElementByClassName(className, display = true) {
 }
 
 function displayNextElement(display = true) {
-  displayElementByClassName("round-next", display);
+  displayElementByClassName(NEXT_ROUND_CLASS, display);
 }
 
 function displayActionElement(display = true) {
-  displayElementByClassName("round-action", display);
+  displayElementByClassName(ROUND_ACTION_CLASS, display);
 }
 
 function displayIncorrectElement(display = true) {
-  displayElementByClassName("round-incorrect", display);
+  displayElementByClassName(INCORRECT_ROUND_CLASS, display);
 }
 
 function displayCorrectElement(display = true) {
-  displayElementByClassName("round-correct", display);
+  displayElementByClassName(CORRECT_ROUND_CLASS, display);
 }
 
 function displayRoundImage(display = true) {
-  displayElementByClassName("round-image", display);
+  displayElementByClassName(ROUND_IMAGE_CLASS, display);
 }
 
 function displayRoundStart(display = true) {
-  displayElementByClassName("round-start", display);
+  displayElementByClassName(START_ROUND_CLASS, display);
 }
 
 function displayHeaderScore(display = true) {
-  displayElementByClassName("header-score", display);
+  displayElementByClassName(HEADER_SCORE_CLASS, display);
 }
 
-function displayRoundOver(display = true) {
-  displayElementByClassName("round-over", display);
+function displayRoundEnd(display = true) {
+  displayElementByClassName(END_ROUND_CLASS, display);
 }
 
 function displayErrorElement() {
-  const element = document.getElementsByClassName("container")[0];
-  element.innerHTML =
-    "<h1><em>Dutton or Voldemort</em> is having problems. Please refresh or just come back later. This is just a pet project I spent an hour or so on, so it is what it is. <br/><br/> - dozyhermit</h1>";
+  const element = document.getElementsByClassName(CONTAINER_CLASS)[0];
+  element.innerHTML = ERROR_MESSAGE_AS_HTML;
 
-  // hack for mobile padding on error message
+  // for better mobile padding for the error message
   element.style.padding = "2rem";
 }
 
 function setRoundImageElement(mask = true) {
-  const suffix = mask === true ? "-mask" : "-unmask";
-  const prefix = mask === true ? "mask" : "unmask";
+  const suffix = mask === true ? `-${MASK_IX}` : `-${UNMASK_IX}`;
+  const prefix = mask === true ? MASK_IX : UNMASK_IX;
 
   const base = `static/images/${prefix}/`;
-  const roundString = CURRENT_ROUND.toString().padStart(3, "0");
+  const roundString = Game.CurrentRound.toString().padStart(3, "0");
 
   const filename = `${base}${roundString}${suffix}.jpeg`;
 
-  const element = document.getElementsByClassName("round-image")[0];
+  const element = document.getElementsByClassName(ROUND_IMAGE_CLASS)[0];
   element.style.backgroundImage = `url("${filename}")`;
 }
 
 function setScoreElement() {
-  const score = document.getElementsByClassName("round-score");
+  const score = document.getElementsByClassName(ROUND_SCORE_CLASS);
 
   Array.from(score).forEach((element) => {
-    element.textContent = SCORE;
+    element.textContent = Game.Score;
   });
 }
 
 function resetHeaderWordWrap() {
-  const element = document.getElementsByClassName("header")[0];
+  const element = document.getElementsByClassName(HEADER_CLASS)[0];
   element.style.whiteSpace = "normal";
 }
 
@@ -87,98 +116,98 @@ function resetHeaderWordWrap() {
 
 async function setSeedJson() {
   try {
-    const seed = await fetch("static/seed.json");
-    const seedAsJson = await seed.json();
+    const result = await fetch(SEED_JSON_PATH);
+    const seed = await result.json();
 
-    if (!seedAsJson || !Array.isArray(seedAsJson) || seedAsJson.length === 0) {
+    if (!seed || !Array.isArray(seed) || seed.length === 0) {
       displayErrorElement();
       return;
     }
 
-    SEED = seedAsJson;
+    Game.Seed = seed;
   } catch (e) {
     displayErrorElement();
   }
 }
 
 function endRound() {
-  displayRoundStart(false);
-  displayHeaderScore(false);
-  displayRoundImage(false);
   displayActionElement(false);
+  displayHeaderScore(false);
   displayNextElement(false);
+  displayRoundImage(false);
+  displayRoundStart(false);
 
-  return displayRoundOver();
+  return displayRoundEnd();
 }
 
 function getRound() {
-  LAST_ROUND = CURRENT_ROUND;
-  CURRENT_ROUND = LAST_ROUND + 1;
+  Game.LastRound = Game.CurrentRound;
+  Game.CurrentRound = Game.LastRound + 1;
 
   // this shouldn't happen but just in case
-  if (LAST_ROUND === CURRENT_ROUND && LAST_ROUND !== 0 && CURRENT_ROUND !== 0) {
+  // things fall out of order
+  if (
+    Game.LastRound === Game.CurrentRound &&
+    Game.LastRound !== 0 &&
+    Game.CurrentRound !== 0
+  ) {
     return getRound();
   }
 
-  // end round
-  if (CURRENT_ROUND >= SEED.length - 1) {
+  if (Game.CurrentRound >= Game.Seed.length - 1) {
     return endRound();
   }
 
-  // hide previous round styles
-  displayIncorrectElement(false);
   displayCorrectElement(false);
+  displayIncorrectElement(false);
   displayNextElement(false);
 
-  // show round action and image
   displayActionElement(true);
   setRoundImageElement(true);
 }
 
 function incrementScore() {
-  SCORE++;
+  Game.Score++;
   setScoreElement();
 }
 
-function isCorrect(answer) {
+function isCorrect(value) {
   displayNextElement();
 
-  // hide round actions
   displayActionElement(false);
   setRoundImageElement(false);
 
-  // if there's a problem
-  if (SEED && SEED[CURRENT_ROUND] && SEED[CURRENT_ROUND].answer !== answer) {
+  if (
+    Game.Seed &&
+    Game.Seed[Game.CurrentRound] &&
+    Game.Seed[Game.CurrentRound].answer !== value
+  ) {
     return displayIncorrectElement();
   }
 
-  // increment score
   displayCorrectElement();
   incrementScore();
 }
 
 function isDutton() {
-  isCorrect(IS_DUTTON_VALUE);
+  isCorrect(IS_DUTTON);
 }
 
 function isVoldemort() {
-  isCorrect(IS_VOLDEMORT_VALUE);
+  isCorrect(IS_VOLDEMORT);
 }
 
 function startRound() {
-  // reset score to zero
-  CURRENT_ROUND = LAST_ROUND = SCORE = 0;
+  Game.CurrentRound = Game.LastRound = Game.Score = 0;
   setScoreElement();
 
-  // remove start styles
   resetHeaderWordWrap();
 
-  displayRoundOver(false);
+  displayRoundEnd(false);
   displayRoundStart(false);
   displayHeaderScore(true);
   displayRoundImage(true);
 
-  // initiate round
   getRound();
 }
 
